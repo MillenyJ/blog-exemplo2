@@ -10,14 +10,14 @@
                     <!-- Post preview-->
                     {% for post in posts %}
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href={% url 'post' post.id %}>
                             <h2 class="post-title">{{post.titulo}}</h2>
                             <h3 class="post-subtitle">{{post.subtitulo}}</h3>
                         </a>
                         <p class="post-meta">
-                            Posted by
+                            postado por
                             <a href="#!">{{post.usuario}}</a>
-                            on {{post.data_criacao}}
+                            em {{post.data_criacao}}
                         </p>
                     </div>
                     <!-- Divider-->

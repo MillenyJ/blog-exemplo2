@@ -27,7 +27,10 @@ def contact(request):
         "blog": Blog.objects.first(),
     }
     if request.method == "POST":
-        print (request.method)
+        print (request.POST['nome'])
+        print (request.POST['email'])
+        print (request.POST['telefone'])
+        print (request.POST['comentario'])
         return render(request, "contact.html", context)
     else:
         return render(request, "contact.html", context)

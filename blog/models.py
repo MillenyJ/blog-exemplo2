@@ -11,3 +11,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+class Blog(models.Model):
+    nome = models.CharField(max_length=100)
+    subnome = models.CharField(max_length=100,blank=True)
+    descricao = models.TextField(max_length=2000,blank=True)
+    capa = models.ImageField()
+    instagram = models.URLField(blank=True)
+    facebook = models.URLField(blank=True)
+    github = models.URLField(blank=True)
+    autores = models.ManyToManyField(User)
+    

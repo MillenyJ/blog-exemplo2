@@ -32,7 +32,12 @@ def contact(request):
         print (request.POST['telefone'])
         print (request.POST['comentario'])
         
-        mensagem= Mensagem
+        mensagem= Mensagem(nome= request.POST['nome'],
+                           email= request.POST['email'],
+                           telefone= request.POST['telefone'],
+                           comentario= request.POST['comentario'])
+        mensagem.save()
+        
         return render(request, "contact.html", context)
     else:
         return render(request, "contact.html", context)

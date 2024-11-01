@@ -16,6 +16,7 @@ def post(request, post_id):
     return render(request, "post.html", context)
     
 def about(request):
+   
     context = {
         "blog": Blog.objects.first(),
     }
@@ -25,4 +26,10 @@ def contact(request):
     context = {
         "blog": Blog.objects.first(),
     }
-    return render(request, "contact.html")
+    if request.method == "POST":
+        print (request.method)
+        return render(request, "contact.html", context)
+    else:
+        return render(request, "contact.html", context)
+    
+    

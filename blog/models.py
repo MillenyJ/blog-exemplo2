@@ -22,3 +22,12 @@ class Blog(models.Model):
     github = models.URLField(blank=True)
     autores = models.ManyToManyField(User)
     
+class Mensagem(models.Model):
+    nome =models.CharField(max_length=100)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=12)
+    comentario = models.CharField(max_length=1000)
+    lida = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.nome} - {self.email}"

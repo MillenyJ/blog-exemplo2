@@ -28,6 +28,7 @@ class Mensagem(models.Model):
     telefone = models.CharField(max_length=12)
     comentario = models.CharField(max_length=1000)
     lida = models.BooleanField(default=False)
+    cidade= models.CharField(max_length=100, blank=True)
     
     def __str__(self):
         return f"{self.nome} - {self.email}"

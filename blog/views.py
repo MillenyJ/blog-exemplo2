@@ -27,15 +27,23 @@ def contact(request):
         "blog": Blog.objects.first(),
     }
     if request.method == "POST":
-        print (request.POST['nome'])
-        print (request.POST['email'])
-        print (request.POST['telefone'])
-        print (request.POST['comentario'])
-        
+        context["erro"]= {}
+        if not request.POST['nome']:
+            context['erro']['nome'] = True
+        if not request.POST['email']:
+            context['erro']['email'] = True
+        if not request.POST['telefone']:
+            context['erro']['telefone'] = True
+        if not request.POST['comentario']:
+            context['erro']['comentario'] = True
+        if context['erro']:
+            return render(request,"contact.html", context)
+            
         mensagem= Mensagem(nome= request.POST['nome'],
                            email= request.POST['email'],
                            telefone= request.POST['telefone'],
-                           comentario= request.POST['comentario'])
+                           cidade= request.POST['cidade'],
+                           comentario= request.POST['comentario'],)
         mensagem.save()
         
         return render(request, "contact.html", context)

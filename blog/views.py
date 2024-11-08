@@ -16,16 +16,18 @@ def post(request, post_id):
     return render(request, "post.html", context)
     
 def about(request):
-   
     context = {
         "blog": Blog.objects.first(),
     }
-    return render(request, "about.html")
+    return render(request, "about.html", context)
 
 def contact(request): 
     context = {
         "blog": Blog.objects.first(),
     }
+
+
+
     if request.method == "POST":
         context["erro"]= {}
         if not request.POST['nome']:
@@ -49,5 +51,13 @@ def contact(request):
         return render(request, "contact.html", context)
     else:
         return render(request, "contact.html", context)
+    
+def comentario(request):
+   
+    context = {
+        "mensagem": Mensagem.objects.all(),
+        "blog": Blog.objects.first(),
+    }
+    return render(request, "comentarios.html", context)
     
     

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}<!-- Page Header-->
+<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Comentarios</h1>
+                    <span class="subheading">seus comentarios aqui!<span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+{% block content %}
+<main class= "mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- Post preview-->
+                {{ mensagens.mensagem}}
+                {% for mensagem in mensagens %}
+                    <div class="post-preview">
+                        <a href="{% url 'mensagem' %}">
+                            <h2 class="post-title">{{ mensagem.nome }}</h2>
+                            <h3 class="post-subtitle">{{ mensagem.comentario }}</h3>
+                        </a>
+                        <p class="post-meta">
+                            postado por
+                            <a href="#!">{{ mensagem.email }}</a>
+                        </p>
+                        <a href="{% url 'deletar_mensagem' mensagem.id %}">
+                            <button class="btb btn-danger">Deletar</button>
+                        </a>
+                        
+                        <a href="{% url 'editar_mensagem' mensagem.id %}">
+                            <button class="btb btn-warnig">Editar</button>
+                        </a>
+                        
+                    </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                {% endfor %}
+                <!-- Pager-->
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

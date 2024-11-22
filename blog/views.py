@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Post,Blog,Mensagem
 
 def index(request):
@@ -36,6 +36,8 @@ def contact(request):
             context['erro']['email'] = True
         if not request.POST['telefone']:
             context['erro']['telefone'] = True
+        if not request.POST['cidade']:
+            context['erro']['cidade'] = True
         if not request.POST['comentario']:
             context['erro']['comentario'] = True
         if context['erro']:
@@ -52,12 +54,54 @@ def contact(request):
     else:
         return render(request, "contact.html", context)
     
-def comentario(request):
-   
+def mensagem(request):
     context = {
-        "mensagem": Mensagem.objects.all(),
+        "mensagens": Mensagem.objects.all(),
         "blog": Blog.objects.first(),
     }
-    return render(request, "comentarios.html", context)
+    return render(request, "mensagem.html", context)
+
+def editar_mensagem(request, mensagem_id):
+    context = {
+        "blog": Blog.objects.first(),
+        "mensagem": Mensagem.objects.get(pk=mensagem_id),
+        
+    }
+    if request.method == "POST":
+        context["erro"]= {}
+        if not request.POST['nome']:
+            context['erro']['nome'] = True
+        if not request.POST['email']:
+            context['erro']['email'] = True
+        if not request.POST['telefone']:
+            context['erro']['telefone'] = True
+        if not request.POST['cidade']:
+            context['erro']['cidade'] = True
+        if not request.POST['comentario']:
+            context['erro']['comentario'] = True
+        if context['erro']:
+            return render(request,"edit_contact.html", context)
+        
+        mensagem = context ["mensagem"]
+        mensagem.nome = request.POST['nome']
+        mensagem.email = request.POST['email']
+        mensagem.telefone = request.POST['telefone']
+        mensagem.cidade = request.POST['cidade']
+        mensagem.comentario = request.POST['comentario']
+        mensagem.save()
+        
+    return render(request, "edit_contact.html", context)
+
+def deletar_mensagem(request, mensagem_id):
+    context = {
+        "blog": Blog.objects.first(),
+        "mensagem": Mensagem.objects.get(pk=mensagem_id),
+    }
+    
+    if request.method == "POST":
+        context["mensagem"].delete()
+        return redirect('mensagem')
+    else:
+        return render(request, "deletar_contact.html", context)
     
     

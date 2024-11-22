@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_list_or_404 
 from .models import Post,Blog,Mensagem
 
 def index(request):
@@ -95,7 +95,7 @@ def editar_mensagem(request, mensagem_id):
 def deletar_mensagem(request, mensagem_id):
     context = {
         "blog": Blog.objects.first(),
-        "mensagem": Mensagem.objects.get(pk=mensagem_id),
+        "mensagem": get_list_or_404 (Mensagem ,pk=mensagem_id),
     }
     
     if request.method == "POST":

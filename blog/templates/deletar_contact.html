@@ -32,7 +32,7 @@
                             <form id="contactForm" method= "POST">
                                 {% csrf_token %}
                                 <div class="form-floating">
-                                    <a href="{% url 'deletar_mensagem' mensagem.id %}">
+                                    <a href="{% url 'mensagem' %}">
                                         <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Não</button>
                                     </a>
                                     

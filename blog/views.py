@@ -31,13 +31,13 @@ def contact(request):
 
     if request.method == "POST":
         form= MensagemForm(request.POST)
-            if form.is_valid():
-                mensagem.nome= form.cleaned_data["nome"]
-                mensagem.email= form.cleaned_data["email"]
-                mensagem.telefone= form.cleaned_data["telefone"]
-                mensagem.comentario= form.cleaned_data["mensagem"]
-                mensagem.cidade= form.cleaned_data["cidade"]
-                mensagem.save()
+        if form.is_valid():
+            mensagem.nome= form.cleaned_data["nome"]
+            mensagem.email= form.cleaned_data["email"]
+            mensagem.telefone= form.cleaned_data["telefone"]
+            mensagem.comentario= form.cleaned_data["mensagem"]
+            mensagem.cidade= form.cleaned_data["cidade"]
+            mensagem.save()
         
         return render(request, "contact.html", context)
     else:
@@ -76,4 +76,8 @@ def deletar_mensagem(request, mensagem_id):
     else:
         return render(request, "deletar_contact.html", context)
     
-    
+def cadastro(request):
+    context = {
+        "blog": Blog.objects.first(),
+    }
+    return render(request, "cadastro.html", context)
